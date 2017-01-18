@@ -1,26 +1,40 @@
-var questions = [
-  ['How many states are in the United States?', 50],
-  ['How many continents are there?', 7],
-  ['How many legs does an insect have?', 6]
-];
-var correctAnswers = 0;
-var question;
-var answer;
-var response;
 
 function print(message) {
-  document.write(message);
+  var outputDiv = document.getElementById('output');
+  outputDiv.innerHTML += message;
 }
 
-for (var i = 0; i < questions.length; i += 1) {
-  question = questions[i][0];
-  answer = questions[i][1];
-  response = prompt(question);
-  response = parseInt(response);
-  if (response === answer) {
-    correctAnswers += 1;
-  } 
+var correctAnswers = 0;
+var correctQuestions = [];
+var incorrectQuestions = [];
+
+var questionsAnswers = [
+    ['How many planets are there?', '8'],
+    ['How many moons does Jupiter have?', '67'],
+    ['What color are my socks?', 'white']
+];
+
+function askQuestions() {
+    for (var i = 0; i < questionsAnswers.length; i++) {
+        answer = prompt(questionsAnswers[i][0]);
+        if (answer === questionsAnswers[i][1]) {
+            correctAnswers +=1;
+            correctQuestions.push(i);
+        }
+        else {
+            incorrectQuestions.push(i);
+        }
+    }
+    print('You got ' + correctAnswers + ' questions correct.');
+    print('<p>Questions you got correct are: </p>');
+    for (var j = 0; j < correctQuestions.length; j++) {
+        print('<li>' + questionsAnswers[correctQuestions[j]][0]+ '</li>');
+    }
+
+    print('<p>Questions you got incorrect are: </p>');
+    for (var j = 0; j < incorrectQuestions.length; j++) {
+        print('<li>' + questionsAnswers[incorrectQuestions[j]][0]+ '</li>');
+    }
 }
 
-html = "You got " + correctAnswers + " question(s) right."
-print(html);
+askQuestions();
