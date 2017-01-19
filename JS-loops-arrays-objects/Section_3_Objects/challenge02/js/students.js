@@ -1,5 +1,5 @@
-var students = [ 
-  { 
+var students = [
+  {
    name: 'Dave',
     track: 'Front End Development',
     achievements: 158,
@@ -30,3 +30,16 @@ var students = [
     points: '350'
   }
 ];
+
+function print(message) {
+  var div = document.getElementById('output');
+  div.innerHTML += message;
+}
+
+for (var i = 0; i < students.length; i++) {
+    var message = '<h2>Students: ' + students[i].name + '</h2>';
+    message += '<p>Track: ' + students[i].track + '</p>';
+    message += '<p>Achievements: ' + students[i].achievements + '</p>';
+    message += '<p>Points: ' + students[i].points + '</p>';
+    print(message);
+}

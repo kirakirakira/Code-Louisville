@@ -1,5 +1,5 @@
-var students = [ 
-  { 
+var students = [
+  {
    name: 'Dave',
     track: 'Front End Development',
     achievements: 158,
@@ -18,7 +18,7 @@ var students = [
     points: '2025'
   },
   {
-    name: 'John',
+    name: 'Jody',
     track: 'Learn WordPress',
     achievements: '40',
     points: '1950'
