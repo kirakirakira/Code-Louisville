@@ -11,7 +11,10 @@
   xhr.onreadystatechange = function() {
       // readyState of 4 = DONE
       if (xhr.readyState === 4) {
-          document.getElementById('ajax').innerHTML = xhr.responseText;
+          // status of 200 = DONE
+          if (xhr.status === 200) {
+              document.getElementById('ajax').innerHTML = xhr.responseText;
+          }
       }
   };
   xhr.open('GET', 'sidebar.html');
