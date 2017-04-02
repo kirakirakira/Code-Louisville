@@ -22,6 +22,7 @@ xhr.onreadystatechange = function () {
 xhr.send();
 
 // Room Availability Status
+
 var xhr2 = new XMLHttpRequest();
 xhr2.open('GET', 'data/rooms.json');
 xhr2.onreadystatechange = function () {
