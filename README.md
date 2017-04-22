@@ -1,2 +1,2 @@
 # Code-Louisville
-Treehouse exercises for FSJS track
+Treehouse exercises for the Code Louisville front-end development track
