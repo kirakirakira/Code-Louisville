@@ -1,4 +1,4 @@
-/* ================================= 
+/* =================================
   Base Styles
 ==================================== */
 
@@ -32,7 +32,7 @@ a {
 	text-decoration: none;
 }
 
-/* ================================= 
+/* =================================
   Base Layout Styles
 ==================================== */
 
@@ -62,7 +62,7 @@ a {
 		color: #3acec2;
 		text-transform: uppercase;
 	}
-	
+
 	.main-nav a:hover {
 		color: #093a58;
 	}
@@ -87,7 +87,7 @@ a {
 	background: #d9e4ea;
 }
 
-/* ================================= 
+/* =================================
   Media Queries
 ==================================== */
 
@@ -118,8 +118,27 @@ a {
 
 	/* ---- Columns ---- */
 
-	
-	
+	.primary {
+		width: 60%;
+	}
+
+	.secondary {
+		width: 40%;
+	}
+
+	.col {
+		float: left;
+		padding-right: 1em;
+	}
+
+	.col + .col {
+		padding-left: 1em;
+	}
+
+	.col:last-child {
+		padding-right: 0;
+	}
+
 	/* ------------- */
 
 	.feat-img {
