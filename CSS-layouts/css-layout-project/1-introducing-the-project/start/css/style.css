@@ -44,7 +44,7 @@ img {
 
 .name {
 	font-size: 1.25em;
-	margin: 0;
+	margin: 0; /* removes top and bottom default margins */
 }
 
 .main-nav {
@@ -76,6 +76,12 @@ img {
 	text-align: center;
 	padding-top: 2em;
 	padding-bottom: 2em;
+	margin-bottom: 60px;
+}
+
+.col {
+	padding-right: 1em;
+	padding-left: 1em;
 }
 
 .main-footer {
@@ -100,22 +106,23 @@ img {
 	width: 190px;
 }
 
+.headline {
+	margin-bottom: 0;
+}
+
 /* =================================
   Media Queries
 ==================================== */
 
 @media (min-width: 769px) {
 
+	/* show the primary and secondary column side by side and the tertiary column below */
 	.primary {
-		width: 40%;
+		width: 50%;
 	}
 
 	.secondary {
-		width: 30%;
-	}
-
-	.tertiary {
-		width: 30%;
+		width: 50%;
 	}
 
 	.col {
@@ -132,7 +139,7 @@ img {
 	}
 
 	.container {
-		width: 85%;
+		width: 90%;
 		max-width: 1150px;
 		margin: 0 auto;
 	}
@@ -150,6 +157,10 @@ img {
 		float: left;
 	}
 
+	.tagline {
+		font-size: 1.4em;
+	}
+
 	/* ---- Float clearfix ---- */
 
 	.clearfix::after {
@@ -160,16 +171,28 @@ img {
 
 }
 
-/*@media (min-width: 769px) {
+@media (min-width: 1025px) {
 
+	.container {
+		width: 80%;
+		max-width: 1150px;
+	}
 
+	.primary {
+		width: 40%;
+	}
+
+	.secondary,
+	.tertiary {
+		width: 30%;
+	}
 
 	/* ---- Float clearfix ---- */
 
-	/*.clearfix::after {
+	.clearfix::after {
 		content: " ";
 		display: table;
 		clear: both;
-	}*/
+	}
 
-/*}*/
+}
