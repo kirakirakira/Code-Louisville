@@ -15,3 +15,24 @@
   border-radius: 5px;
   line-height: 1;
 }
+
+.jpg::before {
+    content: url(../img/icn-picture.svg);
+    margin-right: 8px;
+}
+
+.zip::before {
+    content: url(../img/icn-zip.svg);
+    margin-right: 8px;
+}
+
+h1::before,
+h1::after {
+    content: "";
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: coral;
+    margin: 0 10px;
+}
