@@ -1,4 +1,4 @@
-/* ================================= 
+/* =================================
   Media Queries
 ==================================== */
 
@@ -6,7 +6,8 @@
 
 	.main-header,
 	.main-nav,
-	.row {
+	.row,
+	.col {
 		display: flex;
 	}
 
@@ -17,6 +18,12 @@
 
 	.col {
 		flex: 1;
+		flex-direction: column;
+	}
+
+	.button {
+		margin-top: auto;
+		align-self: flex-end;
 	}
 
 }
