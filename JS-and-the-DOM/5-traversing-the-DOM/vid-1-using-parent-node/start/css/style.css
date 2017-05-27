@@ -79,3 +79,11 @@ li button {
   font-size: .75em;
   padding: .5em .65em;
 }
+
+ul li:first-of-type .up {
+    visibility:hidden;
+}
+
+ul li:last-of-type .down {
+    visibility:hidden;
+}
