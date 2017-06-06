@@ -1,17 +1,16 @@
 $(document).ready(function() {
 
+  $('form').submit(function (evt) {
+    evt.preventDefault(); // stops browser's default behavior -> leaving the page
+    var $searchTerm = $('#search');
+    var $submitButton = $('#submit');
 
- $('button').click(function () {
-    // highlight the button
-    // not AJAX, just cool looking
-    $("button").removeClass("selected");
-    $(this).addClass("selected");
-
+    $searchTerm.prop("disabled", true);
+    $submitButton.attr("disabled", true).val("searching....");
     // the AJAX part
     var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
-    var animal = $(this).text();
     var flickrOptions = {
-      tags: animal,
+      tags: $searchTerm.val(),
       format: "json"
     };
     function displayPhotos(data) {
@@ -23,9 +22,10 @@ $(document).ready(function() {
       }); // end each
       photoHTML += '</ul>';
       $('#photos').html(photoHTML);
+      $searchTerm.prop("disabled", false);
+      $submitButton.attr("disabled", false).val("Search");
     }
     $.getJSON(flickerAPI, flickrOptions, displayPhotos);
-
-  }); // end click
+  })
 
 }); // end ready
