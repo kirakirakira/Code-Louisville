@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  
+
  var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
 
 
