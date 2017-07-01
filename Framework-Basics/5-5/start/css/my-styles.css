@@ -6,6 +6,10 @@
 	border-radius: 6px;
 }
 
+.circle {
+	border-radius: 50%;
+}
+
 /* Type
 ================================ */
 
@@ -70,7 +74,7 @@ strong {
 .ft-copy {
 	padding-top: 30px;
 }
-.ft-copy p { 
+.ft-copy p {
 	width: 90%;
 }
 .panel {
@@ -81,6 +85,18 @@ strong {
 	padding: 55px 0;
 	margin-top: 10px;
 	margin-bottom: 100px;
+}
+
+.th-copy {
+	padding-top: 30px;
+}
+
+.teacher-desc strong {
+	display: block;
+}
+
+hr {
+	margin-bottom: 58px;
 }
 
 /* Banner Headline
@@ -152,6 +168,11 @@ strong {
 }
 [class*="fi-"] {
 	margin-right: 8px;
+}
+
+.th-logo {
+	width: 155px;
+	margin: -.75em 0 .95em 0;
 }
 
 /* Form
@@ -239,4 +260,3 @@ input.phone-txt {
 		margin-bottom: 16px;
 	}
 }
-
