@@ -14,8 +14,6 @@ def game():
             print("That's not an integer!")
 
         else:
-            if guess not in guesses:
-                guesses.append(guess)
             # compare guess to secret number
             if guess == secret_number:
                 print("You got it! My number was {}".format(secret_number))
@@ -24,8 +22,17 @@ def game():
                 print("Too high!")
             elif guess < secret_number:
                 print("Too low!")
-    # 
-    # if len(guesses) == 5:
-    #     print("Game over! You ran out of guesses!")
+            guesses.append(guess)
+
+    else:
+        print("You didn't get it! My number was {}".format(secret_number))
+
+    play_again = input("Do you want to play again? Y/n ")
+
+    if play_again.lower() != 'n':
+        print('-----------NEW GAME--------------')
+        game()
+    else:
+        print("Bye!")
 
 game()
