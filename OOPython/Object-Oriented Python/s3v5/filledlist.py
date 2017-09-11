@@ -1,6 +1,5 @@
 import copy
 
-
 class FilledList(list):
     def __init__(self, count, value, *args, **kwargs):
         super().__init__()
