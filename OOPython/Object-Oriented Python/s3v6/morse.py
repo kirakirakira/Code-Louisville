@@ -16,16 +16,18 @@ class Letter:
 
     @classmethod
     def from_string(cls, dash_dot):
-        output = []
-        for blip in dash_dot.split('-'):
-            if blip.lower() == 'dash':
-                output.append('-')
+        dash_dot_list = dash_dot.split('-')
+        list_pattern = []
+        for blip in dash_dot_list:
+            if (blip.lower() == 'dash'):
+                list_pattern.append('_')
+            elif (blip.lower() == 'dot'):
+                list_pattern.append('.')
             else:
-                output.append('.')
-        print(output)
-        return cls(output)
+                pass
+        return cls(list_pattern)
 
 class S(Letter):
     def __init__(self):
-         pattern = ['.', '.', '.']
-         super().__init__(pattern)
+        pattern = ['.', '.', '.']
+        super().__init__(pattern)
