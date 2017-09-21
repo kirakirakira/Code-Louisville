@@ -8,6 +8,9 @@
   </head>
   <body>
     <div class="site-container">
+      <nav>
+        <a href="{% url 'homepage' %}">Home</a>
+      </nav>
       {% block content %}{% endblock %}
     </div>
   </body>
