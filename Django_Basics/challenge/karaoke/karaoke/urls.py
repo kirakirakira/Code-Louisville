@@ -1,4 +1,4 @@
-"""learning_site URL Configuration
+"""karaoke URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.8/topics/http/urls/
@@ -15,14 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from . import views
 
 urlpatterns = [
-    url(r'^courses/', include('courses.urls', namespace='courses')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', views.home_page, name="homepage"),
+    url(r'^songs/', include('songs.urls', namespace='songs')),
+    url(r'^$', views.home, name='home'),
 ]
-
-urlpatterns += staticfiles_urlpatterns()
