@@ -3,5 +3,14 @@
 {% block title %}{{ performer }}{% endblock %}
 
 {% block content %}
-<h2>{{ performer }}</h2>
+<article>
+  <h2>{{ performer }}</h2>
+
+  <section>
+    {% for song in performer.song_set.all %}
+      <h3>{{ song }}</h3>
+    {% endfor %}
+  </section>
+
+</article>
 {% endblock %}

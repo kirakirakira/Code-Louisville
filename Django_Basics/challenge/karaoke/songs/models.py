@@ -5,7 +5,7 @@ class Song(models.Model):
     title = models.CharField(max_length=255)
     artist = models.CharField(max_length=255)
     performer = models.ForeignKey("Performer")
-    duration = models.IntegerField(default=0)
+    length = models.IntegerField(default=0)
 
     def __str__(self):
         return "{} by {}".format(self.title, self.artist)
