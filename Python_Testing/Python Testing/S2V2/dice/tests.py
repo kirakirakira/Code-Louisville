@@ -10,7 +10,7 @@ class DieTests(unittest.TestCase):
 
     def test_creation(self):
         self.assertEqual(self.d6.sides, 6)
-        self.assertIn(self.d6.value, range(1, 6))
+        self.assertIn(self.d6.value, range(1, 7))
 
     def test_add(self):
         self.assertIsInstance(self.d6+self.d8, int)
@@ -35,6 +35,3 @@ class RollTests(unittest.TestCase):
     def test_bad_description(self):
         with self.assertRaises(ValueError):
             dice.Roll('2b6')
-
-if __name__ = '__main__':
-    unittest.main()
