@@ -14,13 +14,22 @@ class QuizForm(forms.ModelForm):
         ]
 
 
-class TrueFalseQuestion(forms.ModelForm):
+class QuestionForm(forms.ModelForm):
+    class Media:
+        css = {'all': ('courses/css/order.css',)}
+        js = (
+            'courses/js/vendor/jquery.fn.sortable.min.js',
+            'courses/js/order.js'
+        )
+
+
+class TrueFalseQuestion(QuestionForm):
     class Meta:
         model = models.TrueFalseQuestion
         fields = ['order', 'prompt']
 
 
-class MultipleChoiceQuestion(forms.ModelForm):
+class MultipleChoiceQuestion(QuestionForm):
     class Meta:
         model = models.MultipleChoiceQuestion
         fields = [
@@ -38,3 +47,19 @@ class AnswerForm(forms.ModelForm):
             'text',
             'correct'
         ]
+
+
+AnswerFormSet = forms.modelformset_factory(
+    models.Answer,
+    form=AnswerForm,
+    extra=2,
+)
+
+AnswerInlineFormSet = forms.inlineformset_factory(
+    models.Question,
+    models.Answer,
+    extra=0,
+    fields=('order', 'text', 'correct'),
+    formset=AnswerFormSet,
+    min_num=1,
+)
