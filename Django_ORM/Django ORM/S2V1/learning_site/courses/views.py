@@ -10,12 +10,12 @@ from . import models
 
 
 def course_list(request):
-    courses = models.Course.objects.all()
+    courses = models.Course.objects.filter(published=True)
     return render(request, 'courses/course_list.html', {'courses': courses})
 
 
 def course_detail(request, pk):
-    course = get_object_or_404(models.Course, pk=pk)
+    course = get_object_or_404(models.Course, pk=pk, published=True)
     steps = sorted(chain(course.text_set.all(), course.quiz_set.all()),
                    key=lambda step: step.order)
     return render(request, 'courses/course_detail.html', {
@@ -25,20 +25,20 @@ def course_detail(request, pk):
 
 
 def text_detail(request, course_pk, step_pk):
-    step = get_object_or_404(models.Text, course_id=course_pk, pk=step_pk)
+    step = get_object_or_404(models.Text, course_id=course_pk, pk=step_pk, course__published=True)
     return render(request, 'courses/text_detail.html', {'step': step})
 
 
 def quiz_detail(request, course_pk, step_pk):
-    step = get_object_or_404(models.Quiz, course_id=course_pk, pk=step_pk)
+    step = get_object_or_404(models.Quiz, course_id=course_pk, pk=step_pk, course__published=True)
     return render(request, 'courses/quiz_detail.html', {'step': step})
 
 
 @login_required
 def quiz_create(request, course_pk):
-    course = get_object_or_404(models.Course, pk=course_pk)
+    course = get_object_or_404(models.Course, pk=course_pk, course__published=True)
     form = forms.QuizForm()
-    
+
     if request.method == 'POST':
         form = forms.QuizForm(request.POST)
         if form.is_valid():
@@ -53,9 +53,9 @@ def quiz_create(request, course_pk):
 
 @login_required
 def quiz_edit(request, course_pk, quiz_pk):
-    quiz = get_object_or_404(models.Quiz, pk=quiz_pk, course_id=course_pk)
+    quiz = get_object_or_404(models.Quiz, pk=quiz_pk, course_id=course_pk, course__published=True)
     form = forms.QuizForm(instance=quiz)
-    
+
     if request.method == 'POST':
         form = forms.QuizForm(instance=quiz, data=request.POST)
         if form.is_valid():
@@ -72,19 +72,19 @@ def create_question(request, quiz_pk, question_type):
         form_class = forms.TrueFalseQuestionForm
     else:
         form_class = forms.MultipleChoiceQuestionForm
-    
+
     form = form_class()
     answer_forms = forms.AnswerInlineFormSet(
         queryset=models.Answer.objects.none()
     )
-    
+
     if request.method == 'POST':
         form = form_class(request.POST)
         answer_forms = forms.AnswerInlineFormSet(
             request.POST,
             queryset=models.Answer.objects.non()
         )
-        
+
         if form.is_valid() and answer_forms.is_valid():
             question = form.save(commit=False)
             question.quiz = quiz
@@ -95,7 +95,7 @@ def create_question(request, quiz_pk, question_type):
                 answer.save()
             messages.success(request, "Added question")
             return HttpResponseRedirect(quiz.get_absolute_url())
-    
+
     return render(request, 'courses/question_form.html', {
             'quiz': quiz,
             'form': form,
@@ -117,7 +117,7 @@ def edit_question(request, quiz_pk, question_pk):
     answer_forms = forms.AnswerInlineFormSet(
         queryset=form.instance.answer_set.all()
     )
-    
+
     if request.method == 'POST':
         form = form_class(request.POST, instance=question)
         answer_forms = forms.AnswerInlineFormSet(
@@ -145,14 +145,14 @@ def edit_question(request, quiz_pk, question_pk):
 def answer_form(request, question_pk, answer_pk=None):
     question = get_object_or_404(models.Question, pk=question_pk)
     formset = forms.AnswerFormSet(queryset=question.answer_set.all())
-    
+
     if request.method == 'POST':
         formset = forms.AnswerFormSet(request.POST,
                                       queryset=question.answer_set.all())
-        
+
         if formset.is_valid():
             answers = formset.save(commit=False)
-            
+
             for answer in answers:
                 answer.question = question
                 answer.save()
@@ -162,4 +162,14 @@ def answer_form(request, question_pk, answer_pk=None):
             'formset': formset,
             'question': question
     })
-    
+
+
+def courses_by_teacher(request, teacher):
+    courses = models.Course.objects.filter(teacher__username=teacher, published=True)
+    return render(request, 'courses/course_list.html', {'courses': courses})
+
+
+def search(request):
+    term = request.GET.get('q')
+    courses = models.Course.objects.filter(title__icontains=term, published=True)
+    return render(request, 'courses/course_list.html', {'courses': courses})
