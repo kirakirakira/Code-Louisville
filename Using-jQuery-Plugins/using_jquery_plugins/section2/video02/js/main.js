@@ -6,7 +6,10 @@ $(".animsition").animsition({
   outDuration: 500
 });
 
-$('.header').sticky();
+$('.header').sticky({
+  getWidthFrom: '.container',
+  responsiveWidth: true
+});
 
 $('.header').on('sticky-start', function () {
   $('.description').html('We build <strong>great</strong> apps');
@@ -16,10 +19,16 @@ $('.header').on('sticky-end', function () {
   $('.description').html('We build apps');
 });
 
-$('#want-us').sticky({
-  topSpacing: 60
+$('.want-us').sticky({
+  topSpacing: 60,
+  getWidthFrom: '.container',
+  responsiveWidth: true
 });
 
-$('#want-us').on('sticky-start').append('<span id="email-us"> Email us!</span>');
-//
-// $('#email-us').on('sticky-end').remove();
+$('.want-us').on('sticky-start', function() {
+  $(this).append('<a href="#" class="email-us"> Email us!</a>');
+});
+
+$('.want-us').on('sticky-end', function() {
+  $('.email-us').remove();
+});
