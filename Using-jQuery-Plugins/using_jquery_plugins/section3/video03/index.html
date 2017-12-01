@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="css/normalize.min.css">
         <link rel="stylesheet" href="js/animsition/animsition.min.css">
         <link rel="stylesheet" href="js/slick/slick.css">
+        <link rel="stylesheet" href="js/slick/slick-theme.css">
         <link rel="stylesheet" href="css/main.css">
     </head>
     <body>
@@ -44,7 +45,7 @@
                     <img src="img/slide-dailyFeed.png" alt="" />
                   </div>
                 </div><!--/Slide 1-->
-                
+
                 <div class="slide orange">
                   <div class="grid-half">
                     <h2>ChitChat</h2>
@@ -55,7 +56,7 @@
                     <img src="img/slide-chitChat.png" alt="" />
                   </div>
                 </div><!--/Slide 2-->
-                
+
                 <div class="slide green">
                   <div class="grid-half">
                     <h2>MixTape</h2>
@@ -66,7 +67,7 @@
                     <img src="img/slide-mixTape.png" alt="" />
                   </div>
                 </div><!--/Slide 3-->
-                
+
                 <div class="slide yellow">
                   <div class="grid-half">
                     <h2>KITT</h2>
@@ -118,7 +119,13 @@
       <script src="js/slick/slick.min.js"></script>
       <script src="js/main.js"></script>
       <script>
-      $('.slides').slick();
+      $('.slides').slick({
+        fade: true,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        arrows: false,
+        dots: true
+      });
       </script>
     </body>
 </html>
