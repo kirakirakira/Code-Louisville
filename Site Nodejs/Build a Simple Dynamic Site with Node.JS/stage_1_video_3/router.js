@@ -1,6 +1,7 @@
 var Profile = require("./profile.js");
 var renderer = require("./renderer.js");
 var querystring = require("querystring");
+var fs = require("fs");
 
 var commonHeaders = {'Content-Type': 'text/html'};
 
@@ -33,7 +34,7 @@ function home(request, response) {
 function user(request, response) {
   //if url == "/..."
   var username = request.url.replace("/", "");
-  if(username.length > 0) {
+  if(username.length > 0 && request.url.indexOf('.css') === -1) {
     response.writeHead(200, commonHeaders);
     renderer.view("header", {}, response);
 
@@ -69,5 +70,15 @@ function user(request, response) {
   }
 }
 
+function css(request, response) {
+  if(request.url.indexOf(".css") !== -1) {
+    var fileContents = fs.readFileSync(`.${request.url}`, {encoding: 'utf8'});
+    response.writeHead(200, {'Content-Type': 'text/css'});
+    response.write(fileContents);
+    response.end();
+  }
+}
+
 module.exports.home = home;
 module.exports.user = user;
+module.exports.css = css;

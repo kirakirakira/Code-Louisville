@@ -6,6 +6,7 @@ var router = require("./router.js");
 var http = require('http');
 var i = 5;
 http.createServer(function (request, response) {
+  router.css(request, response);
   router.home(request, response);
   router.user(request, response);
 }).listen(1337, '127.0.0.1');
