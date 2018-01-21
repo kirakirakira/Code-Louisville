@@ -1,0 +1,15 @@
+extends layout.pug
+
+block content
+  section#content
+    table
+      tr
+        th First name
+        th Last name
+      tr
+        td
+          each first in firstnames
+            p= first
+        td
+          each last in lastnames
+            p= last
