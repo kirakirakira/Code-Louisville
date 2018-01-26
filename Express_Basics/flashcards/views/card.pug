@@ -2,7 +2,11 @@ extends layout.pug
 
 block content
   section#content
-    h2= prompt
+    h2= text
+    button(id="showHintBtn") Show Hint
     if hint
-      p
+      p(id="questionHint" style="display: none")
         i Hint: #{hint}
+    a(href=`${id}?side=${oppositeSide}`) #{oppositeSide}
+    br
+    a(href='/cards') Next card
