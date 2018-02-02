@@ -1,0 +1,37 @@
+/Weekly
+
+Display entire week of meals in a table & totals for food groups/nutrients
+
+
+/Daily/Day of Week
+
+VIEW the day:
+
+MONDAY
+
+Breakfast: display
+Lunch: display
+Dinner: display
+Show total for food groups/nutrients
+
+/Daily/Day of Week/Create
+
+Select meal:
+	Breakfast
+	Lunch
+	Dinner
+
+Enter in meal
+Check off the food groups/nutrients
+
+{ 	_id: BLAH,
+	Monday: {Breakfast: 
+
+
+
+Week
+	Days
+		Meals
+
+Can have same meal attached to multiple days
+Always same 7 days attached to a week
