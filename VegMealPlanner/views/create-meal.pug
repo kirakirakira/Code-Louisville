@@ -1,0 +1,73 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    title Vegan Meal Planner
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css', integrity='sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb', crossorigin='anonymous')
+    link(rel='stylesheet', href='')
+  body
+    .container
+      h1 Vegan Meal Planner
+      h2 Enter in your meal
+      form
+        .form-group
+          label(for='exampleFormControlSelect1') Choose Which Meal
+          select#exampleFormControlSelect1.form-control
+            option Breakfast
+            option Lunch
+            option Dinner
+            option Snack
+            option Beverage
+        .form-group
+          label(for='exampleFormControlInput1') Name of Meal
+          input#exampleFormControlInput1.form-control(type='text', placeholder='Very Delicious Food')
+        .form-check
+          label(for='exampleFormCheck') Which of Dr. Greger's Daily Dozen does this meal include?
+          br
+          .row
+            .col-sm
+              label.form-check.form-check-label
+                input#exampleFormCheck.form-check-input(type='checkbox', value='')
+                |             Beans
+              label.form-check.form-check-label
+                input.form-check-input(type='checkbox', value='')
+                |             Berries
+              label.form-check.form-check-label
+                input.form-check-input(type='checkbox', value='')
+                |             Other Fruits
+              label.form-check.form-check-label
+                input.form-check-input(type='checkbox', value='')
+                |             Flaxseeds
+            .col-sm
+              label.form-check.form-check-label
+                input.form-check-input(type='checkbox', value='')
+                |             Nuts
+              label.form-check.form-check-label
+                input.form-check-input(type='checkbox', value='')
+                |             Spices
+              label.form-check.form-check-label
+                input.form-check-input(type='checkbox', value='')
+                |             Cruciferous Vegetables
+              label.form-check.form-check-label
+                input.form-check-input(type='checkbox', value='')
+                |             Leafy Greens
+            .col-sm
+              label.form-check.form-check-label
+                input.form-check-input(type='checkbox', value='')
+                |             Other Vegetables
+              label.form-check.form-check-label
+                input.form-check-input(type='checkbox', value='')
+                |             Whole Grains
+              label.form-check.form-check-label
+                input.form-check-input(type='checkbox', value='')
+                |             Beverages
+          br
+          .form-group
+            label(for='exampleFormControlTextarea1') Notes/Recipe
+            textarea#exampleFormControlTextarea1.form-control(rows='3')
+          input.btn.btn-primary(type='submit', value='Submit')
+          input.btn.btn-light(type='button', value='Cancel')
+    footer.footer
+      .container
+        span.text-muted Copyright 2018 by Kira Hartlage
