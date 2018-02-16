@@ -68,7 +68,7 @@ router.post("/:qID/answers", function(req, res,next){
 
 // PUT /questions/:qID/answers/:aID
 // Edit a specific answer
-router.put("/:qID/answers/:aID", function(req, res){
+router.put("/:qID/answers/:aID", function(req, res, next){
 	req.answer.update(req.body, function(err, result){
 		if(err) return next(err);
 		res.json(result);
@@ -77,7 +77,7 @@ router.put("/:qID/answers/:aID", function(req, res){
 
 // DELETE /questions/:qID/answers/:aID
 // Delete a specific answer
-router.delete("/:qID/answers/:aID", function(req, res){
+router.delete("/:qID/answers/:aID", function(req, res, next){
 	req.answer.remove(function(err){
 		req.question.save(function(err, question){
 			if(err) return next(err);
@@ -89,7 +89,7 @@ router.delete("/:qID/answers/:aID", function(req, res){
 // POST /questions/:qID/answers/:aID/vote-up
 // POST /questions/:qID/answers/:aID/vote-down
 // Vote on a specific answer
-router.post("/:qID/answers/:aID/vote-:dir", 
+router.post("/:qID/answers/:aID/vote-:dir",
 	function(req, res, next){
 		if(req.params.dir.search(/^(up|down)$/) === -1) {
 			var err = new Error("Not Found");
@@ -99,7 +99,7 @@ router.post("/:qID/answers/:aID/vote-:dir",
 			req.vote = req.params.dir;
 			next();
 		}
-	}, 
+	},
 	function(req, res, next){
 		req.answer.vote(req.vote, function(err, question){
 			if(err) return next(err);
@@ -108,19 +108,3 @@ router.post("/:qID/answers/:aID/vote-:dir",
 });
 
 module.exports = router;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
