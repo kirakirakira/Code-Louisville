@@ -4,13 +4,14 @@ var express = require('express');
 var app = express();
 var routes = require("./routes");
 
-var bodyParser = require('body-parser');
+var jsonParser = require('body-parser').json;
 var logger = require('morgan');
 
 app.use(logger("dev"));
+app.use(jsonParser());
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+// app.use(bodyParser.urlencoded({extended: false}));
+// app.use(bodyParser.json());
 
 var mongoose = require("mongoose");
 
@@ -24,6 +25,16 @@ db.on("error", function(err) {
 
 db.once("open", function() {
   console.log("db connection successful");
+});
+
+app.use(function(req, res, next){
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	if(req.method === "OPTIONS") {
+		res.header("Access-Control-Allow-Methods", "PUT,POST,DELETE");
+		return res.status(200).json({});
+	}
+	next();
 });
 
 app.use("/questions", routes);

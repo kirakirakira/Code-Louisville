@@ -18,7 +18,7 @@ var AnswerSchema = new Schema({
   text: String,
   createdAt: {type: Date, default: Date.now},
   updatedAt: {type: Date, default: Date.now},
-  votes: {type: number, default: 0}
+  votes: {type: Number, default: 0}
 });
 
 AnswerSchema.method("update", function(updates, callback) {

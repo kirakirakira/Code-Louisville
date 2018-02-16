@@ -1,0 +1,11 @@
+git reset --hard HEAD
+	discards all changes
+
+git fetch
+	get new stuff from remote
+
+git checkout -fb week5 origin/week5
+	f - force
+	b - branch name
+	week5 - local branch name
+	origin/week5 remote branch name
