@@ -1,1 +1,2 @@
-// src/models/index.js
+// models/index.js
+const mongoose = require('mongoose');
