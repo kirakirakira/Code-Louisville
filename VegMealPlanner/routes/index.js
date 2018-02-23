@@ -8,10 +8,22 @@ const { data } = require('../data/meal.json');
 
 router.get('/', (req, res) => {
   // get the data for each day and put in an object
-  Meal.find({}).
-    where('days').in(['Monday']).
-    select('mealName').
-    exec();
+  Meal.find({days: {$in: ['Monday']}}, function(err, meals) {
+    if(err) return handleError(err);
+    console.log(meals);
+    let dayPlan = [];
+
+    for (i = 0; i < meals.length; i++) {
+      let { timeOfDay } = meals[i];
+      let { mealName } = meals[i];
+
+      // if the time of day is already in there, just add the meal name to the array
+      dayPlan.push({[timeOfDay]: [mealName]});
+
+    }
+    console.log(dayPlan);
+  });
+
   // pass the object to the pug template
   res.render('display-week');
 });
