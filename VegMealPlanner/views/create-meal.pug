@@ -11,6 +11,34 @@ html(lang='en')
       h1 Vegan Meal Planner
       h2 Enter in your meal
       form(method='POST' action='/add')
+        .form-check
+          label(for='exampleFormCheck') Which days?
+          br
+          .row
+            .col-sm
+              label.form-check.form-check-label
+                input#exampleFormCheck.form-check-input(type='checkbox', value='Monday', name="days")
+                |             Monday
+              label.form-check.form-check-label
+                input.form-check-input(type='checkbox', value='Tuesday', name="days")
+                |             Tuesday
+              label.form-check.form-check-label
+                input.form-check-input(type='checkbox', value='Wednesday', name="days")
+                |             Wednesday
+              label.form-check.form-check-label
+                input.form-check-input(type='checkbox', value='Thursday', name="days")
+                |             Thursday
+            .col-sm
+              label.form-check.form-check-label
+                input.form-check-input(type='checkbox', value='Friday', name="days")
+                |             Friday
+              label.form-check.form-check-label
+                input.form-check-input(type='checkbox', value='Saturday', name="days")
+                |             Saturday
+              label.form-check.form-check-label
+                input.form-check-input(type='checkbox', value='Sunday', name="days")
+                |             Sunday
+          br
         .form-group
           label(for='exampleFormControlSelect1') Choose Which Meal
           select#exampleFormControlSelect1.form-control(name='timeOfDay')

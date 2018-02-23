@@ -19,6 +19,9 @@ const mealSchema = new mongoose.Schema({
   },
   categories: {
     type: [{type: String}]
+  },
+  days: {
+    type: [{type: String}]
   }
 });
 

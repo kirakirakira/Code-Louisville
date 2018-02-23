@@ -37,7 +37,7 @@ app.use((req, res, next) => {
   const err = new Error("Not Found");
   err.status = 404;
   next(err);
-})
+});
 
 // error handler
 // define as the last app.use callback
@@ -47,9 +47,9 @@ app.use((err, req, res, next) => {
     message: err.message,
     error: {}
   });
-})
+});
 
 // listen on port 3000
 app.listen(3000, () => {
   console.log("Vegan Meal Planner is running on localhost:3000");
-})
+});
