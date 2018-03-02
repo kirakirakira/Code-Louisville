@@ -10,22 +10,25 @@ router.get('/', (req, res) => {
   // get the data for each day and put in an object
   Meal.find({days: {$in: ['Monday']}}, function(err, meals) {
     if(err) return handleError(err);
-    console.log(meals);
-    let dayPlan = [];
+    // console.log(meals);
+
+    let dayPlan = {"Breakfast": [], "Lunch": [], "Dinner": []};
 
     for (i = 0; i < meals.length; i++) {
-      let { timeOfDay } = meals[i];
-      let { mealName } = meals[i];
-
-      // if the time of day is already in there, just add the meal name to the array
-      dayPlan.push({[timeOfDay]: [mealName]});
-
+      if (meals[i].timeOfDay === "Breakfast") {
+        console.log(meals[i].mealName);
+        dayPlan["Breakfast"].push(meals[i].mealName);
+      } else if (meals[i].timeOfDay === "Lunch") {
+        dayPlan["Lunch"].push(meals[i].mealName);
+      } else if (meals[i].timeOfDay === "Dinner") {
+        dayPlan["Dinner"].push(meals[i].mealName);
+      }
     }
-    console.log(dayPlan);
-  });
 
-  // pass the object to the pug template
-  res.render('display-week');
+    console.log("Day plan is ", dayPlan["Breakfast"]);
+    // pass the object to the pug template
+    res.render('display-week', dayPlan);
+  });
 });
 
 router.get('/add', (req, res) => {
@@ -61,7 +64,7 @@ router.post('/add', (req, res, next) => {
 router.get('/:day', (req, res) => {
   const { day } = req.params;
   const templateData = data[day];
-
+  console.log(templateData);
   res.render('display-day', templateData);
 });
 
