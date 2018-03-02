@@ -47,6 +47,23 @@ function placeShip (player, ship, startingCoordinates, direction) {
   }
 }
 
+function generateCoordinates() {
+  var x = Math.floor(Math.random() * 9);
+  var y = Math.floor(Math.random() * 9);
+  var coordinates = [x, y];
+  return coordinates;
+}
+
+function generateDirection() {
+  var direction = Math.random() > 0.5
+    ? 'horizontal'
+    : 'vertical';
+  return direction;
+}
+
+// fire(player, generateCoordinates());
+// placeShip(computerPlayer, computerPlayer.ship[0], generateCoordinates(), generateDirection());
+
 module.exports = {
   placeShip: placeShip,
   validateLocations: validateLocations,
