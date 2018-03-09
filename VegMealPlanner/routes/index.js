@@ -9,28 +9,93 @@ const { data } = require('../data/meal.json');
 router.get('/', (req, res) => {
 
   let daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-  
+  let dayPlan = {};
 
-  // get the data for each day and put in an object
-  Meal.find({days: {$in: ['Monday']}}, function(err, meals) {
-    if(err) return handleError(err);
+  // daysOfWeek.forEach((day, index) => {
+  //   Meal.find({days: {$in: [day]}}, function(err, meals) {
+  //     if(err) return handleError(err);
+  //     dayPlan[day] = {"Breakfast": [], "Lunch": [], "Dinner": []};
+  //     for (i = 0; i < meals.length; i++) {
+  //       if (meals[i].timeOfDay === "Breakfast") {
+  //         dayPlan[day]["Breakfast"].push(meals[i].mealName);
+  //       } else if (meals[i].timeOfDay === "Lunch") {
+  //         dayPlan[day]["Lunch"].push(meals[i].mealName);
+  //       } else if (meals[i].timeOfDay === "Dinner") {
+  //         dayPlan[day]["Dinner"].push(meals[i].mealName);
+  //       }
+  //     }
+  //   })
+  // })
 
-    let dayPlan = {"Monday": {"Breakfast": [], "Lunch": [], "Dinner": []}};
+  let promises = [];
+  for (i = 0; i < daysOfWeek.length; i++) {
+    let day = daysOfWeek[i];
+    let promise = Meal.find({days: {$in: [day]}}, function(err, meals) {
+          if(err) return handleError(err);
 
-    for (i = 0; i < meals.length; i++) {
-      if (meals[i].timeOfDay === "Breakfast") {
-        console.log(meals[i].mealName);
-        dayPlan["Monday"]["Breakfast"].push(meals[i].mealName);
-      } else if (meals[i].timeOfDay === "Lunch") {
-        dayPlan["Monday"]["Lunch"].push(meals[i].mealName);
-      } else if (meals[i].timeOfDay === "Dinner") {
-        dayPlan["Monday"]["Dinner"].push(meals[i].mealName);
-      }
-    }
-    console.log("Day plan is ", dayPlan);
-    // pass the object to the pug template
-    res.render('display-week', dayPlan);
-  });
+          dayPlan[day] = {"Breakfast": [], "Lunch": [], "Dinner": []};
+          for (i = 0; i < meals.length; i++) {
+            if (meals[i].timeOfDay === "Breakfast") {
+              dayPlan[day]["Breakfast"].push(meals[i].mealName);
+            } else if (meals[i].timeOfDay === "Lunch") {
+              dayPlan[day]["Lunch"].push(meals[i].mealName);
+            } else if (meals[i].timeOfDay === "Dinner") {
+              dayPlan[day]["Dinner"].push(meals[i].mealName);
+            }
+          }
+          console.log("Day plan within the thing ", dayPlan);
+        });
+    promises.push(promise);
+  }
+  Promise.all(promises)
+    .then(() => {
+      res.render('display-week', dayPlan);
+    })
+    .catch((error) => {
+      return handleError(error);
+    });
+
+
+
+  //
+  // for (i = 0; i < daysOfWeek.length; i++) {
+  //   const day = daysOfWeek[i];
+  //   // get the data for each day and put in an object
+  //   Meal.find({days: {$in: [day]}}, function(err, meals) {
+  //     if(err) return handleError(err);
+  //
+  //     dayPlan[day] = {"Breakfast": [], "Lunch": [], "Dinner": []};
+  //     for (i = 0; i < meals.length; i++) {
+  //       if (meals[i].timeOfDay === "Breakfast") {
+  //         dayPlan[day]["Breakfast"].push(meals[i].mealName);
+  //       } else if (meals[i].timeOfDay === "Lunch") {
+  //         dayPlan[day]["Lunch"].push(meals[i].mealName);
+  //       } else if (meals[i].timeOfDay === "Dinner") {
+  //         dayPlan[day]["Dinner"].push(meals[i].mealName);
+  //       }
+  //     }
+  //   })
+  // }
+
+  // // get the data for each day and put in an object
+  // Meal.find({days: {$in: ['Monday']}}, function(err, meals) {
+  //   if(err) return handleError(err);
+  //
+  //   let dayPlan = {"Monday": {"Breakfast": [], "Lunch": [], "Dinner": []}};
+  //
+  //   for (i = 0; i < meals.length; i++) {
+  //     if (meals[i].timeOfDay === "Breakfast") {
+  //       console.log(meals[i].mealName);
+  //       dayPlan["Monday"]["Breakfast"].push(meals[i].mealName);
+  //     } else if (meals[i].timeOfDay === "Lunch") {
+  //       dayPlan["Monday"]["Lunch"].push(meals[i].mealName);
+  //     } else if (meals[i].timeOfDay === "Dinner") {
+  //       dayPlan["Monday"]["Dinner"].push(meals[i].mealName);
+  //     }
+  //   }
+  // console.log("Day plan is ", dayPlan);
+  // // pass the object to the pug template
+  // res.render('display-week', dayPlan);
 });
 
 router.get('/add', (req, res) => {
