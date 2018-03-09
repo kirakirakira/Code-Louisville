@@ -7,25 +7,27 @@ const Meal = require('../models/index');
 const { data } = require('../data/meal.json');
 
 router.get('/', (req, res) => {
+
+  let daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  
+
   // get the data for each day and put in an object
   Meal.find({days: {$in: ['Monday']}}, function(err, meals) {
     if(err) return handleError(err);
-    // console.log(meals);
 
-    let dayPlan = {"Breakfast": [], "Lunch": [], "Dinner": []};
+    let dayPlan = {"Monday": {"Breakfast": [], "Lunch": [], "Dinner": []}};
 
     for (i = 0; i < meals.length; i++) {
       if (meals[i].timeOfDay === "Breakfast") {
         console.log(meals[i].mealName);
-        dayPlan["Breakfast"].push(meals[i].mealName);
+        dayPlan["Monday"]["Breakfast"].push(meals[i].mealName);
       } else if (meals[i].timeOfDay === "Lunch") {
-        dayPlan["Lunch"].push(meals[i].mealName);
+        dayPlan["Monday"]["Lunch"].push(meals[i].mealName);
       } else if (meals[i].timeOfDay === "Dinner") {
-        dayPlan["Dinner"].push(meals[i].mealName);
+        dayPlan["Monday"]["Dinner"].push(meals[i].mealName);
       }
     }
-
-    console.log("Day plan is ", dayPlan["Breakfast"]);
+    console.log("Day plan is ", dayPlan);
     // pass the object to the pug template
     res.render('display-week', dayPlan);
   });
@@ -63,9 +65,23 @@ router.post('/add', (req, res, next) => {
 
 router.get('/:day', (req, res) => {
   const { day } = req.params;
-  const templateData = data[day];
-  console.log(templateData);
-  res.render('display-day', templateData);
+
+  Meal.find({days: {$in: [day]}}, function(err, meals) {
+    if(err) return handleError(err);
+
+    let dayPlan = {"Day": day, "Breakfast": [], "Lunch": [], "Dinner": []};
+
+    for (i = 0; i < meals.length; i++) {
+      if (meals[i].timeOfDay === "Breakfast") {
+        dayPlan["Breakfast"].push(meals[i].mealName);
+      } else if (meals[i].timeOfDay === "Lunch") {
+        dayPlan["Lunch"].push(meals[i].mealName);
+      } else if (meals[i].timeOfDay === "Dinner") {
+        dayPlan["Dinner"].push(meals[i].mealName);
+      }
+    }
+    res.render('display-day', dayPlan);
+  })
 });
 
 module.exports = router;

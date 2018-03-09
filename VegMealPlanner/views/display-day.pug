@@ -13,23 +13,23 @@ html(lang='en')
         thead.thead-dark
           tr
             th(scope='col') Meal
-            th(scope='col') Monday
+            th(scope='col') #{Day}
         tbody
           tr
             th(scope='row') Breakfast
-            td #{Breakfast.name}
+            td #{Breakfast}
           tr
             th(scope='row') Lunch
-            td #{Lunch.name}
+            td #{Lunch}
           tr
             th(scope='row') Dinner
-            td #{Dinner.name}
+            td #{Dinner}
           tr
             th(scope='row') Snack
-            td Taco Bell
+            td #{Snack}
           tr
             th(scope='row') Beverage
-            td #{Beverage.name}
+            td #{Beverage}
     footer.footer
       .container
         span.text-muted Copyright 2018 by Kira Hartlage

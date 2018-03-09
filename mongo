@@ -1,0 +1,16 @@
+// src/config/index.js
+
+module.exports = {
+  appName: 'Our Glorious Node Project',
+  port: 3030,
+  db: {
+    host: 'localhost:27017',
+    dbName: 'fsjs',
+  }
+
+}
+
+// Connect to MongoDB and create/use database as configured
+mongoose.connection.openUri(`mongodb://${config.db.host}/${config.db.dbName}`);
+
+
