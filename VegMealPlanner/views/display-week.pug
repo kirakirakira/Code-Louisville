@@ -19,55 +19,15 @@ html(lang='en')
             th(scope='col') Snack
             th(scope='col') Beverage
         tbody
-          tr
-            th(scope='row') Monday
-            td #{Monday.Breakfast}
-            td #{Monday.Lunch}
-            td #{Monday.Dinner}
-            td Mark
-            td Mark
-          tr
-            th(scope='row') Tuesday
-            td #{Tuesday.Breakfast}
-            td #{Tuesday.Lunch}
-            td #{Tuesday.Dinner}
-            td Mark
-            td Mark
-          tr
-            th(scope='row') Wednesday
-            td Larry
-            td Mark
-            td Mark
-            td Mark
-            td Mark
-          tr
-            th(scope='row') Thursday
-            td Larry
-            td Mark
-            td Mark
-            td Mark
-            td Mark
-          tr
-            th(scope='row') Friday
-            td Larry
-            td Mark
-            td Mark
-            td Mark
-            td Mark
-          tr
-            th(scope='row') Saturday
-            td Larry
-            td Mark
-            td Mark
-            td Mark
-            td Mark
-          tr
-            th(scope='row') Sunday
-            td Larry
-            td Mark
-            td Mark
-            td Mark
-            td Mark
+          each val, day in {Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday}
+            tr
+              th(scope='row')= day
+              td #{val.Breakfast}
+              td #{val.Lunch}
+              td #{val.Dinner}
+              td #{val.Snack}
+              td #{val.Beverage}
+              
     footer.footer
       .container
         span.text-muted Copyright 2018 by Kira Hartlage
