@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
+import ConfirmedFilter from './ConfirmedFilter';
 import Counter from './Counter';
 import GuestList from './GuestList';
+import Header from './Header';
 
 class App extends Component {
 
@@ -116,29 +118,25 @@ class App extends Component {
     const numberUnconfirmed = this.getUnconfirmedGuests();
     return (
       <div className="App">
-        <header>
-          <h1>RSVP</h1>
-          <p>A Treehouse App</p>
-          <form onSubmit={this.newGuestSubmitHandler}>
-              <input
-                type="text"
-                value={this.state.pendingGuest}
-                placeholder="Invite Someone"
-                onChange={this.handleNameInput}
-              />
-              <button type="submit" name="submit" value="submit">Submit</button>
-          </form>
-        </header>
+        <Header
+          newGuestSubmitHandler={this.newGuestSubmitHandler}
+          pendingGuest={this.state.pendingGuest}
+          handleNameInput={this.handleNameInput}
+        />
         <div className="main">
           <div>
             <h2>Invitees</h2>
-            <label>
+            <ConfirmedFilter
+              toggleFilter={this.toggleFilter}
+              isFiltered={this.state.isFiltered}
+            />
+            {/* <label>
               <input
                 type="checkbox"
                 onChange={this.toggleFilter}
                 checked={this.state.isFiltered}
               /> Hide those who haven't responded
-            </label>
+            </label> */}
           </div>
           <Counter
             totalInvited={totalInvited}
