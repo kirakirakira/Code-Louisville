@@ -4,6 +4,7 @@ import Guest from './Guest';
 import PendingGuest from './PendingGuest';
 
 const GuestList = (props) => {
+  const keyIndex = 0
   return (
     <ul>
       <PendingGuest name={props.pendingGuest} />
@@ -15,10 +16,10 @@ const GuestList = (props) => {
           name={ guest.name }
           isConfirmed={ guest.isConfirmed }
           isEditing={ guest.isEditing }
-          handleConfirmation={() => props.toggleConfirmationAt(index)}
-          handleToggleEditing={() => props.toggleEditingAt(index)}
-          setName={text => props.setNameAt(text, index)}
-          handleRemove={() => props.removeGuestAt(index)}
+          handleConfirmation={() => props.toggleConfirmationAt(guest.id)}
+          handleToggleEditing={() => props.toggleEditingAt(guest.id)}
+          setName={text => props.setNameAt(text, guest.id)}
+          handleRemove={() => props.removeGuestAt(guest.id)}
         />
       )}
     </ul>
