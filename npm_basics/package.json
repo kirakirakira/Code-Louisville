@@ -9,7 +9,7 @@
   "author": "Kira Hartlage",
   "license": "MIT",
   "dependencies": {
-    "bcrypt": "^1.0.3"
+    "bcrypt": "^5.0.0"
   },
   "devDependencies": {}
 }
