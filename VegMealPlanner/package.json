@@ -17,7 +17,7 @@
   "author": "Kira Hartlage",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.16.2",
+    "express": "^4.17.3",
     "mongoose": "^5.0.6",
     "pug": "^2.0.0-rc.4"
   }
